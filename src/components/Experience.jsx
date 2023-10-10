@@ -80,16 +80,16 @@ const Experience = () => {
     ]
   return (
     <div name="experience"
-    className='bg-gradient-to-b from-gray-300 to-black
-    w-full h-full'>
+    className='bg-gradient-to-b from-gray-600 to-black
+    w-full h-max overflow-fixed'>
       <div className='max-w-screen-lg mx-auto p-4 flex flex-col justify-center w-full text-white'>
         <p className='text-4xl font-bold inline border-b-3 border-gray-300
-          p-2'>Experience</p>
-        <p>These are the technologis I've worked with</p>
+          md:p-9 md:m-12 '>Experience</p>
+        <p className='text-2xl p-2 mt-2'>These are the technologis I've worked with</p>
       </div>
 
       <div className='w-full grid grid-cols-2 sm:grid-cols-3
-      gap-8 text-center py-8 px-12 sm:px-0'>
+      gap-8 text-center md:py-8 md:px-12 sm:px-0 '>
 
           {techs.map(({id, src, title, style }) => (
 
