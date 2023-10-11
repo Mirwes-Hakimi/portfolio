@@ -32,9 +32,7 @@ function Footer() {
            }}> (925) 334-8542</a>
             </h1>
       </li>
-        <div className='input-areas'>
-          
-        </div>
+        
       </section>
       <div className='footer-links'>
         <div className='footer-link-wrapper'>
@@ -46,27 +44,10 @@ function Footer() {
             <Link to='/'>KBL Web Solutions gives assistance to make your website accurately.</Link>
            
           </div>
-          <div className='footer-link-items'>
-            <h2>Tax Planning and Projection</h2>
-            <Link to='/sign-up'>Are you going to make the planning for tax and the projection of your tax? </Link>
-            <Link to='/'>If yes, then you are at the right place.
-             Because Bay Tax gives you a superb customer service for Tax Planning and Projection.</Link>
-           
-          </div>
-          <div className='footer-link-items'>
-            <h2>Cash Flow Forecasts</h2>
-            <Link to='/'>Forecasting of cash flow is major point for every business or individual. </Link>
-            <Link to='/'>cash flow works or effects your financial aspects,
-             get all the informations by contact us.</Link>
-           
-          </div>
+        
+         
         </div>
-        <div className='footer-link-wrapper'>
-          <div className='footer-link-items'>
-          
-          </div>
-          
-        </div>
+       
       </div>
       <section className='social-media'>
         <div className='social-media-wrap'>
@@ -80,7 +61,7 @@ function Footer() {
           <div className='social-icons'>
             <Link
               className='social-icon-link'
-              to='https://'
+              to='https://www.facebook.com/profile.php?id=61552247004294'
               target='_blank'
               aria-label='Facebook'
             >

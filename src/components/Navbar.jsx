@@ -2,14 +2,22 @@ import React, { useState } from 'react'
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link } from  'react-router-dom';
 
-// import { Link } from 'react-scroll';
+
 
 
 
 const Navbar = () => {
-    const [nav, setNav] = useState(false);
+    const [nav, setNav] = useState(false); 
     const [click, setClick] = useState(false);
 
+    const toggleMenu = () => {
+      setNav(!nav); /// toggles mobile menu
+      setClick(!click); /// close mobile menu
+    }
+
+    const closeMobileMenu = () => {
+      setNav(false); /// close mobile menu
+    };
     const handleClick = () => setClick (false);
    
 
@@ -54,10 +62,8 @@ const Navbar = () => {
        
         <Link
         to={to}
-        spy={true}
-        smooth={true}
-        duration={500}
-        onClick={handleClick}
+       
+        onClick={toggleMenu}
       >
         {link}
       </Link>
@@ -79,11 +85,8 @@ const Navbar = () => {
       
         <Link
         to={to}
-        offset={50}
-        spy={true}
-        smooth={true}
-        duration={500}
-        onClick={handleClick}
+       
+        onClick={closeMobileMenu}
       >
         {link}
       </Link>
