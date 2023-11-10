@@ -2,6 +2,8 @@ import React from 'react'
 import Footer from './Footer'
 
 const About = () => {
+
+  
   return (
     <div name="about" 
          className='w-full h-screen bg-gradient-to-b from-gray-500 to-gray-700 text-white overflow-x-hidden overflow-y-auto'>
