@@ -5,6 +5,7 @@ import WindowCompany from '../Assets/WindowCompany.png';
 import ZenithFoodMart from '../Assets/ZenithFoodMart.png';
 import ZenithFoodMartHome from '../Assets/ZenithFoodMartHome.png';
 import IssadContact from '../Assets/IssadContact.png';
+import EastBayLimousine from '../Assets/eastbaylimousine.png';
 
 const Portfolio = () => {
 
@@ -29,6 +30,11 @@ const Portfolio = () => {
       src: ZenithFoodMartHome,
       link: "https://www.zenithgood.com/"
     },    
+    {
+      id: 4,
+      src: ZenithFoodMartHome,
+      link: "https://www.eastbaylimousine.com/"
+    }
    
   ]
   return (
