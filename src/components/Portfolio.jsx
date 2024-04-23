@@ -31,8 +31,8 @@ const Portfolio = () => {
       link: "https://www.zenithgood.com/"
     },    
     {
-      id: 4,
-      src: ZenithFoodMartHome,
+      id: 5,
+      src: EastBayLimousine,
       link: "https://www.eastbaylimousine.com/"
     }
    
