@@ -5,8 +5,8 @@ const About = () => {
 
   
   return (
-    <div name="about" 
-         className='w-full h-screen bg-gradient-to-b from-gray-500 to-gray-700 text-white overflow-x-hidden overflow-y-auto'>
+    <div name="about" className="w-full h-screen bg-gradient-to-b from-gray-800 via-gray-700 to-gray-900 text-white overflow-x-hidden overflow-y-auto">
+
       <div className='max-w-screen-lg p-4  mx-auto flex  flex-col justify-center w-full h-full '>
        <div className='pb-8 '>
       <p className='text-4xl mt-10 font-bold inline  border-b-4 border-gray-300'>

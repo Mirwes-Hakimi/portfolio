@@ -5,42 +5,50 @@ import WindowCompany from '../Assets/WindowCompany.png';
 import ZenithFoodMart from '../Assets/ZenithFoodMart.png';
 import ZenithFoodMartHome from '../Assets/ZenithFoodMartHome.png';
 import IssadContact from '../Assets/IssadContact.png';
-import EastBayLimousine from '../Assets/eastbaylimousine.png';
+import grid from '../Assets/grid.png';
+import crypto2 from '../Assets/crypto2.png';
 
 const Portfolio = () => {
 
   const portfolios = [
     {
       id: 1,
-      src: HalalStore,
-      link:"https://afghan-halal-market.vercel.app/"
-    },
-    {
-      id: 2,
-      src: TaxServices,
-      link: "https://issad-income-tax.vercel.app/"
-    },
-    {
-      id: 3,
       src: WindowCompany,
       link: "https://www.healthyhomeca.com/"
+    },
+   
+    {
+      id: 2,
+      src: grid,
+      link: "https://grid-bloom-49f88c2ad29d.herokuapp.com/"
+    },
+   
+
+    {
+      id: 3,
+      src: HalalStore,
+      link:"https://afghan-halal-market.vercel.app/"
     },
     {
       id: 4,
       src: ZenithFoodMartHome,
       link: "https://www.zenithgood.com/"
-    },    
+    },
     {
       id: 5,
-      src: EastBayLimousine,
-      link: "https://www.eastbaylimousine.com/"
-    }
-   
+      src: TaxServices,
+      link: "https://issad-income-tax.vercel.app/"
+    },
+  
+    {
+      id: 6,
+      src: crypto2,
+      link: "https://w-s9-m3-mp.vercel.app/"
+    },
   ]
   return (
-    <div name="portfolio" 
-    className='bg-gradient-to-b from-gray-600 to-gray-800 w-full
-     text-white md:h-screen'>
+    <div name="portfolio" className="bg-gradient-to-b from-gray-800 via-gray-700 to-gray-900 w-full text-white md:h-screen">
+
       <div className='max-w-screen-lg p-4 mx-auto flex flex-col
       justify-center w-full h-full'>
       <div className='pb-8'>
