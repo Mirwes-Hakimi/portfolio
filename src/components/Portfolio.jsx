@@ -5,7 +5,7 @@ import WindowCompany from '../Assets/WindowCompany.png';
 import ZenithFoodMart from '../Assets/ZenithFoodMart.png';
 import ZenithFoodMartHome from '../Assets/ZenithFoodMartHome.png';
 import IssadContact from '../Assets/IssadContact.png';
-import grid from '../Assets/grid.png';
+import team_builder from '../Assets/team_builder.png';
 import crypto2 from '../Assets/crypto2.png';
 
 const Portfolio = () => {
@@ -19,8 +19,8 @@ const Portfolio = () => {
    
     {
       id: 2,
-      src: grid,
-      link: "https://grid-bloom-49f88c2ad29d.herokuapp.com/"
+      src: team_builder,
+      link: "https://team-builder-bice.vercel.app/"
     },
    
 
@@ -32,7 +32,7 @@ const Portfolio = () => {
     {
       id: 4,
       src: ZenithFoodMartHome,
-      link: "https://www.zenithgood.com/"
+      link: "https://zenith-food-mart-i8m6alasf-mikehakimis-projects.vercel.app/"
     },
     {
       id: 5,
