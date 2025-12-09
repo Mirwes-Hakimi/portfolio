@@ -1,5 +1,5 @@
 import React from 'react';
-import HalalStore from '../Assets/HalalStore.png';
+import TestCarRentals from '../Assets/TestCarRentals.png';
 import TaxServices from '../Assets/TaxServices.png';
 import WindowCompany from '../Assets/WindowCompany.png';
 import ZenithFoodMart from '../Assets/ZenithFoodMart.png';
@@ -26,8 +26,8 @@ const Portfolio = () => {
 
     {
       id: 3,
-      src: HalalStore,
-      link:"https://afghan-halal-market.vercel.app/"
+      src: TestCarRentals,
+      link:"https://www.dmvtestcars.com/"
     },
     {
       id: 4,

@@ -9,6 +9,7 @@ import Experience from './components/Experience';
 import Contact from './components/Contact';
 import { BrowserRouter as Router, Route, Routes, redirect } from 'react-router-dom';
 function App() {
+  
   return (
     <Router>
     <div className="App">
