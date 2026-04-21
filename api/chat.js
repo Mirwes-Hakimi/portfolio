@@ -1,6 +1,6 @@
-import Anthropic from '@anthropic-ai/sdk';
+const Anthropic = require('@anthropic-ai/sdk');
 
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+const client = new Anthropic.default({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 const SYSTEM_PROMPT = `You are a friendly assistant for KBL Web Solutions, a professional web development agency based in Pleasant Hill, California.
 
@@ -21,7 +21,7 @@ Your role:
 
 Never invent specific prices. Be warm, professional, and helpful.`;
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -56,4 +56,4 @@ export default async function handler(req, res) {
       reply: "I'm having trouble right now. Please call us at (925) 334-8542 or fill out the contact form!",
     });
   }
-}
+};
