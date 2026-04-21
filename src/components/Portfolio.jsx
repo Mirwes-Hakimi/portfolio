@@ -2,78 +2,135 @@ import React from 'react';
 import TestCarRentals from '../Assets/TestCarRentals.png';
 import TaxServices from '../Assets/TaxServices.png';
 import WindowCompany from '../Assets/WindowCompany.png';
-import ZenithFoodMart from '../Assets/ZenithFoodMart.png';
 import ZenithFoodMartHome from '../Assets/ZenithFoodMartHome.png';
-import IssadContact from '../Assets/IssadContact.png';
 import team_builder from '../Assets/team_builder.png';
 import crypto2 from '../Assets/crypto2.png';
+import NextGenDrivers from '../Assets/NextGenDrivers.png';
 
 const Portfolio = () => {
-
   const portfolios = [
     {
       id: 1,
-      src: WindowCompany,
-      link: "https://www.healthyhomeca.com/"
+      src: NextGenDrivers,
+      link: "https://next-gen-drivers.vercel.app/",
+      title: "Next Gen Drivers",
+      description: "Modern driving school platform with course listings, instructor profiles, and student enrollment.",
+      tags: ["React", "CSS"],
     },
-   
     {
       id: 2,
-      src: team_builder,
-      link: "https://team-builder-bice.vercel.app/"
+      src: TestCarRentals,
+      link: "https://www.dmvtestcars.com/",
+      title: "DMV Rental Car",
+      description: "Business website for a car rental service with a streamlined booking flow.",
+      tags: ["React", "Tailwind CSS"],
     },
-   
-
     {
       id: 3,
-      src: TestCarRentals,
-      link:"https://www.dmvtestcars.com/"
+      src: WindowCompany,
+      link: "https://www.healthyhomeca.com/",
+      title: "Healthy Home Window Company",
+      description: "Business website built with React focused on clean UI and lead generation.",
+      tags: ["React", "Tailwind CSS"],
     },
     {
       id: 4,
-      src: ZenithFoodMartHome,
-      link: "https://zenith-food-mart-i8m6alasf-mikehakimis-projects.vercel.app/"
+      src: team_builder,
+      link: "https://team-builder-bice.vercel.app/",
+      title: "Team Builder App",
+      description: "React app for creating and managing teams using component-based architecture.",
+      tags: ["React", "CSS"],
     },
     {
       id: 5,
-      src: TaxServices,
-      link: "https://issad-income-tax.vercel.app/"
+      src: ZenithFoodMartHome,
+      link: "https://zenith-food-mart-i8m6alasf-mikehakimis-projects.vercel.app/",
+      title: "Zenith Food Mart",
+      description: "E-commerce grocery store with product browsing and cart functionality.",
+      tags: ["React", "CSS"],
     },
-  
     {
       id: 6,
-      src: crypto2,
-      link: "https://w-s9-m3-mp.vercel.app/"
+      src: TaxServices,
+      link: "https://issad-income-tax.vercel.app/",
+      title: "Issad Income Tax Services",
+      description: "Professional tax services site with contact forms and service listings.",
+      tags: ["React", "Tailwind CSS"],
     },
-  ]
-  return (
-    <div name="portfolio" className="bg-gradient-to-b from-gray-800 via-gray-700 to-gray-900 w-full text-white md:h-screen">
+    {
+      id: 7,
+      src: crypto2,
+      link: "https://w-s9-m3-mp.vercel.app/",
+      title: "Crypto Dashboard",
+      description: "Real-time cryptocurrency tracker with live market data and price charts.",
+      tags: ["React", "CSS", "REST API"],
+    },
+  ];
 
-      <div className='max-w-screen-lg p-4 mx-auto flex flex-col
-      justify-center w-full h-full'>
-      <div className='pb-8'>
-        <p className='text-4xl font-bold inline border-b-4 border-gray-100'>Portfolio</p>
-        <p className='py-6 text-2xl'>Check out some of my work!</p>
-      </div>
-      <div className='grid sm:grid-cols-2 md:grid-cols-3 gap-8 px-12 sm:px-0'>
-        
-      {portfolios.map(({ id, src, link }) => (
-        <div key={id} className='shadow-md shadow-yellow-300 rounded-lg '>
-        <img src={ src } alt=''
-        className='rounded-md duration-200 hover:scale-105' />
-        <div className='flex items-center justify-center'>
-          <a href={link} target="_blank" rel="noopener noreferrer"
- className='w-1/2 px-4 py-3 m-4 duration-200 hover:scale-105'>Demo</a>
-          <button className='w-1/2 px-6 py-3 m-4 duration-200 hover:scale-105'></button>
+  return (
+    <div name="portfolio" className="bg-gradient-to-b from-gray-800 via-gray-700 to-gray-900 w-full text-white py-20">
+      <div className="max-w-screen-lg px-4 mx-auto flex flex-col justify-center w-full">
+
+        <div className="pb-12">
+          <p className="text-4xl font-bold inline border-b-4 border-yellow-400">Portfolio</p>
+          <p className="py-6 text-gray-300 text-lg">
+            A selection from 50+ projects I've built — from business sites to full-stack apps.
+          </p>
         </div>
-      </div>
-        ))}
-        
-     
-      </div>
+
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+          {portfolios.map(({ id, src, link, title, description, tags }) => (
+            <div
+              key={id}
+              className="group bg-gray-900 rounded-xl overflow-hidden border border-gray-700 hover:border-yellow-400/60 shadow-lg hover:shadow-yellow-400/20 hover:shadow-xl transition-all duration-300 flex flex-col"
+            >
+              <div className="overflow-hidden h-44 bg-gray-700 flex-shrink-0">
+                {src ? (
+                  <img
+                    src={src}
+                    alt={title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-yellow-500/30 to-gray-800">
+                    <span className="text-yellow-300 text-sm font-semibold tracking-wide uppercase px-4 text-center">
+                      {title}
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              <div className="p-5 flex flex-col flex-1">
+                <h3 className="text-base font-bold text-white mb-2 leading-snug">{title}</h3>
+                <p className="text-gray-400 text-sm mb-4 flex-1 leading-relaxed">{description}</p>
+
+                <div className="flex flex-wrap gap-2 mb-5">
+                  {tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-xs px-2 py-1 bg-yellow-400/10 text-yellow-300 rounded-full border border-yellow-400/20"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <a
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-center px-4 py-2 bg-yellow-400 text-gray-900 font-semibold rounded-lg hover:bg-yellow-300 active:scale-95 transition-all duration-200 text-sm"
+                >
+                  View Live →
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Portfolio
+export default Portfolio;

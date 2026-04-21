@@ -1,71 +1,99 @@
-
-
-import React, { useState } from 'react'
-import { FaBars, FaTimes } from "react-icons/fa";
-import { Link } from 'react-scroll'; 
+import React, { useState, useEffect } from 'react';
+import { FaBars, FaTimes } from 'react-icons/fa';
+import { Link } from 'react-scroll';
 import logo from '../Assets/logo.png';
 
+const links = [
+  { id: 1, link: 'home',       label: 'Home'       },
+  { id: 2, link: 'portfolio',  label: 'Portfolio'  },
+  { id: 3, link: 'experience', label: 'Experience' },
+  { id: 4, link: 'contact',    label: 'Contact'    },
+  { id: 5, link: 'about',      label: 'About'      },
+];
 
 const Navbar = () => {
-    const [nav, setNav] = useState(false);
+  const [nav, setNav] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-    const toggleMenu = () => {
-      setNav(!nav);
-    };
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-    const closeMobileMenu = () => {
-      setNav(false);
-    };
+  return (
+    <div className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-gray-900/95 backdrop-blur-md shadow-lg shadow-black/20' : 'bg-transparent'}`}>
+      <div className="max-w-screen-xl mx-auto px-6 h-20 flex items-center justify-between text-white">
 
-    const links = [
-        { id: 1, link: 'home' },
-        { id: 2, link: 'about' },
-        { id: 3, link: 'portfolio' },
-        { id: 4, link: 'experience' },
-        { id: 5, link: 'contact' }
-    ];
+        {/* Logo */}
+        <Link to="home" smooth duration={500} className="flex items-center gap-3 cursor-pointer">
+          <img src={logo} alt="KBL Logo" className="h-10 w-auto" />
+          <span className="text-xl font-bold tracking-tight">KBL <span className="text-yellow-400">Web</span> Solutions</span>
+        </Link>
 
-    return (
-        <div className="fixed w-full h-20 flex justify-between items-center bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 px-4 text-white z-50">
-            {/* <h1 className="text-3xl font-bold">KBL Web Solutions</h1> */}
-            <nav className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 shadow-lg px-4 py-2 flex items-center justify-between">
-  <div className="flex items-center">
-    <img src={logo} alt="KBL Web Solutions Logo" className="h-10 w-auto mr-2" />
-    <span className="text-white text-xl font-bold">KBL Web Solutions</span>
-  </div>
-  {/* Your existing nav links go here */}
-</nav>
+        {/* Desktop nav */}
+        <ul className="hidden md:flex items-center gap-1">
+          {links.map(({ id, link, label }) => (
+            <li key={id}>
+              <Link
+                to={link}
+                smooth
+                duration={500}
+                className="px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 capitalize cursor-pointer transition-all duration-200 text-sm font-medium"
+                activeClass="text-yellow-400 bg-yellow-400/10"
+                spy
+              >
+                {label}
+              </Link>
+            </li>
+          ))}
+          <li>
+            <a
+              href="tel:+19253348542"
+              className="ml-4 px-5 py-2 bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-semibold rounded-lg text-sm transition-all duration-200 hover:scale-105"
+            >
+              Call Us
+            </a>
+          </li>
+        </ul>
 
+        {/* Mobile toggle */}
+        <button onClick={() => setNav(!nav)} className="md:hidden text-gray-300 hover:text-white transition-colors">
+          {nav ? <FaTimes size={24} /> : <FaBars size={24} />}
+        </button>
+      </div>
 
-            {/* Desktop menu */}
-            <ul className="hidden md:flex">
-                {links.map(({ id, link }) => (
-                    <li key={id} className="px-4 cursor-pointer capitalize text-xl hover:scale-105 duration-200">
-                        <Link to={link} smooth={true} duration={500}
-                        onClick={closeMobileMenu}                        >{link}</Link>
-                    </li>
-                ))}
-            </ul>
-
-            {/* Mobile menu icon */}
-            <div onClick={toggleMenu} className="cursor-pointer pr-4 z-10 text-gray-400 md:hidden">
-                {nav ? <FaTimes size={30} /> : <FaBars size={30} />}
-            </div>
-
-            {/* Mobile menu links */}
-            {nav && (
-                <ul className="flex flex-col justify-center items-center absolute top-0 left-0 w-full h-screen bg-gradient-to-b from-gray-900 to-gray-700 text-white">
-                    {links.map(({ id, link }) => (
-                        <li key={id} className="px-4 cursor-pointer capitalize py-6 text-4xl">
-                            <Link onClick={closeMobileMenu} to={link} smooth duration={500}>
-                                {link}
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
-            )}
+      {/* Mobile menu */}
+      {nav && (
+        <div className="md:hidden bg-gray-900/98 backdrop-blur-md border-t border-gray-800">
+          <ul className="flex flex-col px-6 py-6 gap-2">
+            {links.map(({ id, link, label }) => (
+              <li key={id}>
+                <Link
+                  to={link}
+                  smooth
+                  duration={500}
+                  onClick={() => setNav(false)}
+                  className="block px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 capitalize cursor-pointer transition-all duration-200 text-lg font-medium"
+                >
+                  {label}
+                </Link>
+              </li>
+            ))}
+            <li className="mt-2">
+              <a
+                href="tel:+19253348542"
+                className="block text-center px-4 py-3 bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-bold rounded-lg transition-all duration-200"
+                onClick={() => setNav(false)}
+              >
+                Call Us
+              </a>
+            </li>
+          </ul>
         </div>
-    );
+      )}
+    </div>
+  );
 };
 
 export default Navbar;
