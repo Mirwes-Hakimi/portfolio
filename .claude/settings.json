@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx vercel *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://profolio-tau.vercel.app/)",
+      "Bash(curl -s https://profolio-tau.vercel.app/api/chat)",
+      "Bash(curl -s https://profolio-tau.vercel.app/api/)",
+      "Bash(git push *)",
+      "Bash(curl -X POST https://profolio-tau.vercel.app/api/chat -H \"Content-Type: application/json\" -d \"{\\\\\"messages\\\\\":[{\\\\\"role\\\\\":\\\\\"user\\\\\",\\\\\"content\\\\\":\\\\\"Hello\\\\\"}]}\")",
+      "Bash(curl -s https://profolio-tau.vercel.app/)",
+      "Bash(curl -sI https://profolio-tau.vercel.app/)",
+      "Bash(curl -s -L -X POST https://kblwebsolutions.com/api/chat -H \"Content-Type: application/json\" -d \"{\\\\\"messages\\\\\":[{\\\\\"role\\\\\":\\\\\"user\\\\\",\\\\\"content\\\\\":\\\\\"Hello\\\\\"}]}\")",
+      "Bash(curl -sv -L -X POST https://kblwebsolutions.com/api/chat -H \"Content-Type: application/json\" -d \"{\\\\\"messages\\\\\":[{\\\\\"role\\\\\":\\\\\"user\\\\\",\\\\\"content\\\\\":\\\\\"Hello\\\\\"}]}\")",
+      "Bash(curl -s https://north-cal-furniture-gallery.vercel.app/)",
+      "Bash(curl -s https://danville-driving-school.vercel.app/)"
+    ]
+  }
+}

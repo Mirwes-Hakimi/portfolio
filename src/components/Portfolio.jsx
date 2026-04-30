@@ -1,8 +1,8 @@
 import React from 'react';
 import TestCarRentals from '../Assets/TestCarRentals.png';
-import TaxServices from '../Assets/TaxServices.png';
+import NorthCalFurniture from '../Assets/NorthCalFurniture.png';
 import WindowCompany from '../Assets/WindowCompany.png';
-import ZenithFoodMartHome from '../Assets/ZenithFoodMartHome.png';
+import DanvilleDrivingSchool from '../Assets/DanvilleDrivingSchool.png';
 import team_builder from '../Assets/team_builder.png';
 import crypto2 from '../Assets/crypto2.png';
 import NextGenDrivers from '../Assets/NextGenDrivers.png';
@@ -43,18 +43,18 @@ const Portfolio = () => {
     },
     {
       id: 5,
-      src: ZenithFoodMartHome,
-      link: "https://zenith-food-mart-i8m6alasf-mikehakimis-projects.vercel.app/",
-      title: "Zenith Food Mart",
-      description: "E-commerce grocery store with product browsing and cart functionality.",
-      tags: ["React", "CSS"],
+      src: DanvilleDrivingSchool,
+      link: "https://danville-driving-school.vercel.app/",
+      title: "Danville Driving School",
+      description: "Professional driving school website with course info, scheduling, and clean modern design.",
+      tags: ["React", "Tailwind CSS"],
     },
     {
       id: 6,
-      src: TaxServices,
-      link: "https://issad-income-tax.vercel.app/",
-      title: "Issad Income Tax Services",
-      description: "Professional tax services site with contact forms and service listings.",
+      src: NorthCalFurniture,
+      link: "https://north-cal-furniture-gallery.vercel.app/",
+      title: "NorthCal Furniture Gallery",
+      description: "Luxury furniture showroom site with curated product displays for a Sacramento-based gallery.",
       tags: ["React", "Tailwind CSS"],
     },
     {

@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx --yes playwright screenshot https://next-gen-drivers.vercel.app/ src/Assets/NextGenDrivers.png --wait-for-timeout=3000)",
+      "Bash(npx playwright *)",
+      "WebFetch(domain:next-gen-drivers.vercel.app)",
+      "WebFetch(domain:team-builder-bice.vercel.app)",
+      "WebFetch(domain:zenith-food-mart-i8m6alasf-mikehakimis-projects.vercel.app)",
+      "WebFetch(domain:w-s9-m3-mp.vercel.app)",
+      "Bash(npm install *)",
+      "Skill(claude-api)",
+      "Skill(claude-api:*)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git commit --amend -m 'redesign portfolio site and add AI chat widget *)",
+      "Bash(git commit *)",
+      "Bash(curl -X POST https://profolio-tau.vercel.app/api/chat -H \"Content-Type: application/json\" -d \"{\\\\\"messages\\\\\":[{\\\\\"role\\\\\":\\\\\"user\\\\\",\\\\\"content\\\\\":\\\\\"Hello, what services do you offer?\\\\\"}]}\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://profolio-tau.vercel.app)"
+    ]
+  }
+}
