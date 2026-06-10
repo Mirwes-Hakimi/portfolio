@@ -1,33 +1,39 @@
-
-import './App.css';
-import Home from './components/Home';
-import Navbar from './components/Navbar';
-import SocialLinks from './components/SocialLinks';
-import About from './components/About';
-import Portfolio from './components/Portfolio';
-import Experience from './components/Experience';
-import Contact from './components/Contact';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import Projects from './components/Projects';
+import Skills from './components/Skills';
+import About from './components/About';
+import Timeline from './components/Timeline';
+import GitHub from './components/GitHub';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
+
 function App() {
-  
   return (
     <Router>
-    <div className="App">
-    
-      <Navbar />
       <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path='/portfolio'  element={<Portfolio/>} />
-      <Route path='/experience'  element={<Experience/>} />
-      <Route path='/about'  element={<About/>} />
-      <Route path='/contact'  element={<Contact/>} />
-      <Route path='/socialLinks'  element={<SocialLinks/>} />
-      
+        <Route
+          path="/"
+          element={
+            <div className="bg-zinc-950 text-white min-h-screen">
+              <Navbar />
+              <main>
+                <Hero />
+                <Projects />
+                <Skills />
+                <About />
+                <Timeline />
+                <GitHub />
+                <Contact />
+              </main>
+              <Footer />
+            </div>
+          }
+        />
       </Routes>
-   
-    </div>
-   </Router>
+    </Router>
   );
-};
+}
 
 export default App;

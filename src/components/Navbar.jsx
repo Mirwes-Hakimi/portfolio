@@ -1,98 +1,191 @@
-import React, { useState, useEffect } from 'react';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import React, { useState, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-scroll';
-import logo from '../Assets/logo.png';
+import { FiDownload } from 'react-icons/fi';
 
-const links = [
-  { id: 1, link: 'home',       label: 'Home'       },
-  { id: 2, link: 'portfolio',  label: 'Portfolio'  },
-  { id: 3, link: 'experience', label: 'Experience' },
-  { id: 4, link: 'contact',    label: 'Contact'    },
-  { id: 5, link: 'about',      label: 'About'      },
+const navLinks = [
+  { label: 'Work', to: 'projects' },
+  { label: 'Skills', to: 'skills' },
+  { label: 'About', to: 'about' },
+  { label: 'Timeline', to: 'timeline' },
+  { label: 'Contact', to: 'contact' },
 ];
 
 const Navbar = () => {
-  const [nav, setNav] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [active, setActive] = useState('');
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  return (
-    <div className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-gray-900/95 backdrop-blur-md shadow-lg shadow-black/20' : 'bg-transparent'}`}>
-      <div className="max-w-screen-xl mx-auto px-6 h-20 flex items-center justify-between text-white">
+  useEffect(() => {
+    const sections = document.querySelectorAll('section[id]');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActive(e.target.id);
+        });
+      },
+      { rootMargin: '-40% 0px -55% 0px' }
+    );
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
 
+  const closeMobile = useCallback(() => setMobileOpen(false), []);
+
+  return (
+    <motion.header
+      initial={{ y: -64, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? 'bg-zinc-950/85 backdrop-blur-xl border-b border-zinc-800/60'
+          : 'bg-transparent'
+      }`}
+    >
+      <nav
+        className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between"
+        aria-label="Main navigation"
+      >
         {/* Logo */}
-        <Link to="home" smooth duration={500} className="flex items-center gap-3 cursor-pointer">
-          <img src={logo} alt="KBL Logo" className="h-10 w-auto" />
-          <span className="text-xl font-bold tracking-tight">KBL <span className="text-yellow-400">Web</span> Solutions</span>
+        <Link
+          to="hero"
+          smooth
+          duration={500}
+          className="cursor-pointer flex-shrink-0"
+          aria-label="Back to top"
+        >
+          <span className="text-sm font-semibold tracking-wide text-white">
+            Mirwes<span className="text-indigo-400">.</span>
+          </span>
         </Link>
 
-        {/* Desktop nav */}
-        <ul className="hidden md:flex items-center gap-1">
-          {links.map(({ id, link, label }) => (
-            <li key={id}>
-              <Link
-                to={link}
-                smooth
-                duration={500}
-                className="px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 capitalize cursor-pointer transition-all duration-200 text-sm font-medium"
-                activeClass="text-yellow-400 bg-yellow-400/10"
-                spy
-              >
-                {label}
-              </Link>
-            </li>
-          ))}
-          <li>
-            <a
-              href="tel:+19253348542"
-              className="ml-4 px-5 py-2 bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-semibold rounded-lg text-sm transition-all duration-200 hover:scale-105"
+        {/* Desktop links */}
+        <div className="hidden md:flex items-center gap-8">
+          {navLinks.map(({ label, to }) => (
+            <Link
+              key={to}
+              to={to}
+              smooth
+              duration={600}
+              offset={-80}
+              className={`relative text-sm cursor-pointer transition-colors duration-200 group ${
+                active === to ? 'text-white' : 'text-zinc-500 hover:text-zinc-200'
+              }`}
             >
-              Call Us
-            </a>
-          </li>
-        </ul>
+              {label}
+              <span
+                className={`absolute -bottom-1 left-0 h-px bg-indigo-400 transition-all duration-300 ${
+                  active === to ? 'w-full' : 'w-0 group-hover:w-full'
+                }`}
+              />
+            </Link>
+          ))}
+        </div>
+
+        {/* Desktop CTAs */}
+        <div className="hidden md:flex items-center gap-3">
+          <a
+            href="/Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-sm px-4 py-2 rounded-lg border border-zinc-800 text-zinc-400 hover:border-zinc-600 hover:text-white transition-all duration-200"
+          >
+            <FiDownload size={13} />
+            Resume
+          </a>
+          <Link
+            to="contact"
+            smooth
+            duration={600}
+            offset={-80}
+            className="cursor-pointer text-sm px-4 py-2 rounded-lg bg-white text-zinc-900 font-semibold hover:bg-zinc-100 transition-all duration-200"
+          >
+            Hire Me
+          </Link>
+        </div>
 
         {/* Mobile toggle */}
-        <button onClick={() => setNav(!nav)} className="md:hidden text-gray-300 hover:text-white transition-colors">
-          {nav ? <FaTimes size={24} /> : <FaBars size={24} />}
+        <button
+          onClick={() => setMobileOpen((v) => !v)}
+          aria-label="Toggle menu"
+          aria-expanded={mobileOpen}
+          className="md:hidden relative w-8 h-8 flex flex-col justify-center items-center gap-[5px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded"
+        >
+          <motion.span
+            animate={mobileOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+            transition={{ duration: 0.2 }}
+            className="w-5 h-px bg-white block"
+          />
+          <motion.span
+            animate={mobileOpen ? { opacity: 0, x: -4 } : { opacity: 1, x: 0 }}
+            transition={{ duration: 0.2 }}
+            className="w-5 h-px bg-white block"
+          />
+          <motion.span
+            animate={mobileOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
+            transition={{ duration: 0.2 }}
+            className="w-5 h-px bg-white block"
+          />
         </button>
-      </div>
+      </nav>
 
       {/* Mobile menu */}
-      {nav && (
-        <div className="md:hidden bg-gray-900/98 backdrop-blur-md border-t border-gray-800">
-          <ul className="flex flex-col px-6 py-6 gap-2">
-            {links.map(({ id, link, label }) => (
-              <li key={id}>
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            key="mobile-menu"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: 'easeInOut' }}
+            className="md:hidden overflow-hidden bg-zinc-950/95 backdrop-blur-xl border-b border-zinc-800"
+          >
+            <div className="max-w-6xl mx-auto px-6 py-6 flex flex-col gap-1">
+              {navLinks.map(({ label, to }) => (
                 <Link
-                  to={link}
+                  key={to}
+                  to={to}
                   smooth
-                  duration={500}
-                  onClick={() => setNav(false)}
-                  className="block px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 capitalize cursor-pointer transition-all duration-200 text-lg font-medium"
+                  duration={600}
+                  offset={-80}
+                  onClick={closeMobile}
+                  className="text-zinc-300 hover:text-white py-3 cursor-pointer text-base border-b border-zinc-900 last:border-0 transition-colors"
                 >
                   {label}
                 </Link>
-              </li>
-            ))}
-            <li className="mt-2">
-              <a
-                href="tel:+19253348542"
-                className="block text-center px-4 py-3 bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-bold rounded-lg transition-all duration-200"
-                onClick={() => setNav(false)}
-              >
-                Call Us
-              </a>
-            </li>
-          </ul>
-        </div>
-      )}
-    </div>
+              ))}
+              <div className="flex gap-3 pt-5">
+                <a
+                  href="/Resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 text-center py-3 rounded-xl border border-zinc-800 text-zinc-400 text-sm hover:border-zinc-600 transition-colors"
+                >
+                  Resume
+                </a>
+                <Link
+                  to="contact"
+                  smooth
+                  duration={600}
+                  offset={-80}
+                  onClick={closeMobile}
+                  className="flex-1 text-center py-3 rounded-xl bg-white text-zinc-900 text-sm font-semibold cursor-pointer hover:bg-zinc-100 transition-colors"
+                >
+                  Hire Me
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
   );
 };
 

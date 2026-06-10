@@ -1,76 +1,75 @@
 import React from 'react';
-import { FaFacebook, FaLinkedin } from 'react-icons/fa';
 import { Link } from 'react-scroll';
+import { FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
+
+const footerLinks = ['projects', 'skills', 'about', 'timeline', 'contact'];
+
+const socialLinks = [
+  { icon: FiGithub, href: 'https://github.com/Mirwes-Hakimi', label: 'GitHub' },
+  { icon: FiLinkedin, href: 'https://www.linkedin.com/in/mirwes-hakimi-065b651b7/', label: 'LinkedIn' },
+  { icon: FiMail, href: 'mailto:mirwes210@gmail.com', label: 'Email' },
+];
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-gray-900 border-t border-gray-800 text-white py-12">
-      <div className="max-w-screen-lg mx-auto px-6">
-
-        <div className="grid md:grid-cols-3 gap-10 mb-10">
-
+    <footer className="border-t border-zinc-900 py-12">
+      <div className="max-w-6xl mx-auto px-6">
+        {/* Top row */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-8">
           {/* Brand */}
           <div>
-            <h2 className="text-xl font-bold mb-2">KBL <span className="text-yellow-400">Web</span> Solutions</h2>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              Modern, responsive websites built to grow your business — from Pleasant Hill, CA.
+            <p className="text-sm font-semibold text-white">
+              Mirwes<span className="text-indigo-400">.</span>
+            </p>
+            <p className="text-xs text-zinc-600 mt-0.5">
+              Frontend Developer · React · Next.js · AI
             </p>
           </div>
 
-          {/* Quick links */}
-          <div>
-            <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-widest mb-4">Quick Links</h3>
-            <ul className="flex flex-col gap-2">
-              {['home', 'about', 'portfolio', 'experience', 'contact'].map((link) => (
-                <li key={link}>
-                  <Link
-                    to={link}
-                    smooth
-                    duration={500}
-                    className="text-gray-400 hover:text-yellow-400 capitalize text-sm cursor-pointer transition-colors duration-200"
-                  >
-                    {link}
-                  </Link>
-                </li>
+          {/* Nav links */}
+          <nav aria-label="Footer navigation">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+              {footerLinks.map((section) => (
+                <Link
+                  key={section}
+                  to={section}
+                  smooth
+                  duration={600}
+                  offset={-80}
+                  className="text-xs text-zinc-600 hover:text-zinc-300 transition-colors cursor-pointer capitalize"
+                >
+                  {section}
+                </Link>
               ))}
-            </ul>
-          </div>
+            </div>
+          </nav>
 
-          {/* Contact info */}
-          <div>
-            <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-widest mb-4">Contact</h3>
-            <p className="text-gray-400 text-sm mb-2">1978 Contra Costa Blvd, Pleasant Hill, CA 94523</p>
-            <a href="tel:+19253348542" className="text-yellow-400 hover:text-yellow-300 text-sm font-medium transition-colors">
-              (925) 334-8542
-            </a>
-          </div>
-        </div>
-
-        {/* Bottom bar */}
-        <div className="border-t border-gray-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-gray-500 text-sm">© {new Date().getFullYear()} KBL Web Solutions. All rights reserved.</p>
+          {/* Social */}
           <div className="flex items-center gap-4">
-            <a
-              href="https://www.facebook.com/profile.php?id=61552247004294"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-yellow-400 transition-colors duration-200"
-              aria-label="Facebook"
-            >
-              <FaFacebook size={20} />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/mirwes-hakimi-065b651b7/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-yellow-400 transition-colors duration-200"
-              aria-label="LinkedIn"
-            >
-              <FaLinkedin size={20} />
-            </a>
+            {socialLinks.map(({ icon: Icon, href, label }) => (
+              <a
+                key={label}
+                href={href}
+                target={href.startsWith('mailto') ? undefined : '_blank'}
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="text-zinc-600 hover:text-white transition-colors"
+              >
+                <Icon size={16} />
+              </a>
+            ))}
           </div>
         </div>
 
+        {/* Bottom row */}
+        <div className="border-t border-zinc-900 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-xs text-zinc-700">
+            © {new Date().getFullYear()} Mirwes Hakimi. All rights reserved.
+          </p>
+          <p className="text-xs text-zinc-800">
+            Built with React · Tailwind CSS · Framer Motion
+          </p>
+        </div>
       </div>
     </footer>
   );

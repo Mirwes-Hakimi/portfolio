@@ -1,145 +1,193 @@
 import React, { useState, useRef } from 'react';
-import emailjs from 'emailjs-com';
 import { motion } from 'framer-motion';
-import { MdOutlineEmail, MdOutlinePhone } from 'react-icons/md';
+import emailjs from 'emailjs-com';
+import { FiGithub, FiLinkedin, FiMail, FiSend, FiCheck } from 'react-icons/fi';
+
+const EMAILJS_SERVICE  = 'service_05tn09g';
+const EMAILJS_TEMPLATE = 'template_k7nr79j';
+const EMAILJS_KEY      = '6LKuop0YHiirMBE0J';
+
+const contactItems = [
+  {
+    icon: FiMail,
+    label: 'Email',
+    value: 'mirwes210@gmail.com',
+    href: 'mailto:mirwes210@gmail.com',
+  },
+  {
+    icon: FiLinkedin,
+    label: 'LinkedIn',
+    value: 'mirwes-hakimi-065b651b7',
+    href: 'https://www.linkedin.com/in/mirwes-hakimi-065b651b7/',
+  },
+  {
+    icon: FiGithub,
+    label: 'GitHub',
+    value: 'Mirwes-Hakimi',
+    href: 'https://github.com/Mirwes-Hakimi',
+  },
+];
 
 const Contact = () => {
-  const form = useRef();
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [isSending, setIsSending] = useState(false);
+  const formRef = useRef();
+  const [status, setStatus] = useState('idle'); // idle | sending | sent | error
 
-  const sendEmail = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setIsSending(true);
+    setStatus('sending');
 
     emailjs
-      .sendForm(
-        'service_05tn09g',
-        'template_k7nr79j',
-        form.current,
-        '6LKuop0YHiirMBE0J'
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-          setIsSuccess(true);
-          setIsSending(false);
-          setTimeout(() => setIsSuccess(false), 3000);
-          form.current.reset();
-        },
-        (error) => {
-          console.log(error.text);
-          setIsSending(false);
-        }
-      );
+      .sendForm(EMAILJS_SERVICE, EMAILJS_TEMPLATE, formRef.current, EMAILJS_KEY)
+      .then(() => {
+        setStatus('sent');
+        formRef.current.reset();
+        setTimeout(() => setStatus('idle'), 5000);
+      })
+      .catch(() => setStatus('error'));
   };
 
   return (
-    <div name="contact" className="w-full bg-gradient-to-b from-gray-800 via-gray-900 to-gray-900 text-white py-24">
-      <div className="max-w-screen-lg mx-auto px-6">
+    <section id="contact" className="py-32 border-t border-zinc-900">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
 
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="mb-14 text-center"
-        >
-          <p className="text-4xl font-bold inline border-b-4 border-yellow-400">Contact</p>
-          <p className="mt-5 text-gray-400 text-lg">Ready to start your project? Let's talk.</p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 gap-12 items-start">
-
-          {/* Info panel */}
+          {/* Left: info */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
+            initial={{ opacity: 0, x: -32 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             viewport={{ once: true }}
-            className="flex flex-col gap-6"
           >
-            <h3 className="text-2xl font-bold text-white">Get in touch</h3>
-            <p className="text-gray-400 leading-relaxed">
-              Fill out the form and we'll get back to you as soon as possible, or call us directly.
+            <p className="text-xs font-semibold uppercase tracking-widest text-indigo-400 mb-4">
+              Contact
+            </p>
+            <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-6">
+              Let's work
+              <br />
+              <span className="text-zinc-500">together.</span>
+            </h2>
+            <p className="text-zinc-400 leading-relaxed mb-10 text-[15px]">
+              I'm actively looking for frontend and React developer roles in 2026. If
+              you're building something interesting or have an open position, I'd love to
+              hear about it.
             </p>
 
-            <div className="flex items-center gap-4 bg-gray-800 border border-gray-700 rounded-xl p-5">
-              <div className="text-yellow-400"><MdOutlinePhone size={28} /></div>
-              <div>
-                <p className="text-sm text-gray-400">Phone</p>
-                <a href="tel:+19253348542" className="text-white font-semibold hover:text-yellow-400 transition-colors">
-                  +1 (925) 334-8542
+            <div className="space-y-3 mb-10">
+              {contactItems.map(({ icon: Icon, label, value, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target={href.startsWith('mailto') ? undefined : '_blank'}
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 text-zinc-400 hover:text-white transition-colors group"
+                >
+                  <div className="w-9 h-9 rounded-xl bg-zinc-900 border border-zinc-800 group-hover:border-zinc-600 flex items-center justify-center transition-all flex-shrink-0">
+                    <Icon size={15} />
+                  </div>
+                  <div>
+                    <span className="text-xs text-zinc-600 block">{label}</span>
+                    <span className="text-sm text-zinc-300 group-hover:text-white transition-colors">
+                      {value}
+                    </span>
+                  </div>
                 </a>
-              </div>
+              ))}
             </div>
 
-            <div className="flex items-center gap-4 bg-gray-800 border border-gray-700 rounded-xl p-5">
-              <div className="text-yellow-400"><MdOutlineEmail size={28} /></div>
-              <div>
-                <p className="text-sm text-gray-400">Email</p>
-                <span className="text-white font-semibold">kblwebsolutions@gmail.com</span>
-              </div>
+            <div className="inline-flex items-center gap-2 px-3 py-2 rounded-full border border-emerald-500/20 bg-emerald-500/5 text-emerald-400 text-xs font-medium">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true" />
+              Available for new roles · Ready to start
             </div>
           </motion.div>
 
-          {/* Form */}
+          {/* Right: form */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
+            initial={{ opacity: 0, x: 32 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             viewport={{ once: true }}
           >
-            {isSuccess ? (
-              <div className="flex items-center justify-center h-full min-h-64">
-                <div className="text-center">
-                  <div className="text-5xl mb-4">✅</div>
-                  <p className="text-2xl font-bold text-white">Message Sent!</p>
-                  <p className="text-gray-400 mt-2">We'll be in touch soon.</p>
-                </div>
-              </div>
-            ) : (
-              <form
-                ref={form}
-                onSubmit={sendEmail}
-                className="flex flex-col gap-4 bg-gray-800 border border-gray-700 rounded-2xl p-8"
-              >
+            <form
+              ref={formRef}
+              onSubmit={handleSubmit}
+              className="space-y-4"
+              noValidate
+            >
+              <div>
+                <label htmlFor="user_name" className="block text-xs font-medium text-zinc-500 mb-2">
+                  Name
+                </label>
                 <input
-                  type="text"
+                  id="user_name"
                   name="user_name"
+                  type="text"
+                  required
+                  autoComplete="name"
                   placeholder="Your name"
-                  required
-                  className="p-4 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors"
+                  className="w-full px-4 py-3 rounded-xl bg-zinc-900 border border-zinc-800 text-white placeholder-zinc-600 text-sm focus:outline-none focus:border-indigo-500/60 focus:bg-zinc-900/80 transition-all"
                 />
+              </div>
+
+              <div>
+                <label htmlFor="user_email" className="block text-xs font-medium text-zinc-500 mb-2">
+                  Email
+                </label>
                 <input
-                  type="email"
+                  id="user_email"
                   name="user_email"
-                  placeholder="Your email"
+                  type="email"
                   required
-                  className="p-4 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors"
+                  autoComplete="email"
+                  placeholder="your@email.com"
+                  className="w-full px-4 py-3 rounded-xl bg-zinc-900 border border-zinc-800 text-white placeholder-zinc-600 text-sm focus:outline-none focus:border-indigo-500/60 focus:bg-zinc-900/80 transition-all"
                 />
+              </div>
+
+              <div>
+                <label htmlFor="message" className="block text-xs font-medium text-zinc-500 mb-2">
+                  Message
+                </label>
                 <textarea
+                  id="message"
                   name="message"
-                  placeholder="Your message"
-                  rows={6}
                   required
-                  className="p-4 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors resize-none"
+                  rows={5}
+                  placeholder="Tell me about the role or project..."
+                  className="w-full px-4 py-3 rounded-xl bg-zinc-900 border border-zinc-800 text-white placeholder-zinc-600 text-sm focus:outline-none focus:border-indigo-500/60 focus:bg-zinc-900/80 transition-all resize-none"
                 />
-                <button
-                  type="submit"
-                  disabled={isSending}
-                  className="mt-2 px-6 py-3 bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-bold rounded-lg hover:scale-105 transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
-                >
-                  {isSending ? 'Sending...' : 'Send Message →'}
-                </button>
-              </form>
-            )}
+              </div>
+
+              <button
+                type="submit"
+                disabled={status === 'sending' || status === 'sent'}
+                className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl bg-white text-zinc-900 font-semibold text-sm hover:bg-zinc-100 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                {status === 'sent' ? (
+                  <>
+                    <FiCheck size={15} />
+                    Message Sent!
+                  </>
+                ) : status === 'sending' ? (
+                  'Sending…'
+                ) : (
+                  <>
+                    <FiSend size={15} />
+                    Send Message
+                  </>
+                )}
+              </button>
+
+              {status === 'error' && (
+                <p className="text-sm text-red-400 text-center pt-1">
+                  Something went wrong. Email me directly at mirwes210@gmail.com.
+                </p>
+              )}
+            </form>
           </motion.div>
 
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
