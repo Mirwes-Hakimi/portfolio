@@ -13,7 +13,11 @@
       "Bash(curl -sv -L -X POST https://kblwebsolutions.com/api/chat -H \"Content-Type: application/json\" -d \"{\\\\\"messages\\\\\":[{\\\\\"role\\\\\":\\\\\"user\\\\\",\\\\\"content\\\\\":\\\\\"Hello\\\\\"}]}\")",
       "Bash(curl -s https://north-cal-furniture-gallery.vercel.app/)",
       "Bash(curl -s https://danville-driving-school.vercel.app/)",
-      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\mirwe\\\\programming\\\\profolio\" -Recurse -Force | Select-Object FullName | ForEach-Object { $_.FullName -replace [regex]::Escape\\('c:\\\\Users\\\\mirwe\\\\programming\\\\profolio'\\), '.' } | Sort-Object)"
+      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\mirwe\\\\programming\\\\profolio\" -Recurse -Force | Select-Object FullName | ForEach-Object { $_.FullName -replace [regex]::Escape\\('c:\\\\Users\\\\mirwe\\\\programming\\\\profolio'\\), '.' } | Sort-Object)",
+      "WebFetch(domain:www.dmvtestcars.com)",
+      "WebFetch(domain:www.linkneat.com)",
+      "WebFetch(domain:danville-driving-school.vercel.app)",
+      "WebFetch(domain:north-cal-furniture-gallery.vercel.app)"
     ]
   }
 }

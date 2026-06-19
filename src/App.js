@@ -1,11 +1,10 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import Services from './components/Services';
 import Projects from './components/Projects';
-import Skills from './components/Skills';
 import About from './components/About';
-import Timeline from './components/Timeline';
-import GitHub from './components/GitHub';
+import Pricing from './components/Pricing';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
@@ -20,11 +19,10 @@ function App() {
               <Navbar />
               <main>
                 <Hero />
+                <Services />
                 <Projects />
-                <Skills />
                 <About />
-                <Timeline />
-                <GitHub />
+                <Pricing />
                 <Contact />
               </main>
               <Footer />

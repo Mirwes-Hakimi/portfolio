@@ -1,47 +1,90 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-scroll';
-import { FiGithub, FiLinkedin, FiMail, FiArrowRight, FiDownload } from 'react-icons/fi';
-
-const socialLinks = [
-  { icon: FiGithub, href: 'https://github.com/Mirwes-Hakimi', label: 'GitHub' },
-  { icon: FiLinkedin, href: 'https://www.linkedin.com/in/mirwes-hakimi-065b651b7/', label: 'LinkedIn' },
-  { icon: FiMail, href: 'mailto:mirwes210@gmail.com', label: 'Email' },
-];
+import { FiArrowRight, FiPhone } from 'react-icons/fi';
 
 const stagger = {
   container: {
     hidden: {},
-    show: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
+    show: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
   },
   item: {
-    hidden: { opacity: 0, y: 24 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
+    hidden: { opacity: 0, y: 28 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] } },
   },
 };
+
+const stats = [
+  { num: '24/7', label: 'AI Availability' },
+  { num: '3', label: 'Languages' },
+  { num: '5+', label: 'Live Client Sites' },
+  { num: 'Free', label: 'Initial Quote' },
+];
 
 const Hero = () => {
   return (
     <section
       id="hero"
       className="relative min-h-screen flex flex-col justify-center overflow-hidden"
+      style={{ background: '#020817' }}
     >
-      {/* Ambient background */}
+      {/* ── Animated gradient mesh background ── */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        {/* Dot grid */}
+
+        {/* Subtle grid lines */}
         <div
-          className="absolute inset-0 opacity-[0.035]"
+          className="absolute inset-0 opacity-[0.04]"
           style={{
             backgroundImage:
-              'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.9) 1px, transparent 0)',
-            backgroundSize: '32px 32px',
+              'linear-gradient(rgba(99,102,241,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(99,102,241,0.6) 1px, transparent 1px)',
+            backgroundSize: '44px 44px',
           }}
         />
-        {/* Glow blobs */}
-        <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[96px]" />
-        <div className="absolute bottom-1/4 right-[5%] w-[400px] h-[400px] bg-violet-600/8 rounded-full blur-[80px]" />
-        {/* Top center glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-32 bg-indigo-500/5 blur-2xl" />
+
+        {/* Blue blob — main glow, top-left */}
+        <motion.div
+          animate={{ x: [0, 40, 0], y: [0, -30, 0] }}
+          transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute rounded-full"
+          style={{
+            top: '15%', left: '5%',
+            width: '700px', height: '700px',
+            background: 'radial-gradient(circle, rgba(37,99,235,0.22) 0%, rgba(59,130,246,0.1) 45%, transparent 70%)',
+            filter: 'blur(80px)',
+          }}
+        />
+
+        {/* Violet blob — bottom-right */}
+        <motion.div
+          animate={{ x: [0, -30, 0], y: [0, 40, 0] }}
+          transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut', delay: 3 }}
+          className="absolute rounded-full"
+          style={{
+            bottom: '10%', right: '5%',
+            width: '600px', height: '600px',
+            background: 'radial-gradient(circle, rgba(124,58,237,0.18) 0%, rgba(139,92,246,0.08) 45%, transparent 70%)',
+            filter: 'blur(70px)',
+          }}
+        />
+
+        {/* Cyan accent — center-right */}
+        <motion.div
+          animate={{ x: [0, 20, 0], y: [0, -20, 0] }}
+          transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut', delay: 6 }}
+          className="absolute rounded-full"
+          style={{
+            top: '50%', right: '25%',
+            width: '400px', height: '400px',
+            background: 'radial-gradient(circle, rgba(6,182,212,0.1) 0%, transparent 70%)',
+            filter: 'blur(60px)',
+          }}
+        />
+
+        {/* Top edge glow line */}
+        <div
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-px"
+          style={{ background: 'linear-gradient(90deg, transparent, rgba(99,102,241,0.4), rgba(6,182,212,0.3), transparent)' }}
+        />
       </div>
 
       <div className="relative max-w-6xl mx-auto px-6 pt-28 pb-20 w-full">
@@ -51,108 +94,119 @@ const Hero = () => {
           animate="show"
           className="max-w-3xl"
         >
-          {/* Availability badge */}
+          {/* Badge */}
           <motion.div variants={stagger.item}>
-            <span className="inline-flex items-center gap-2 mb-8 px-3 py-1.5 rounded-full border border-emerald-500/25 bg-emerald-500/8 text-emerald-400 text-xs font-medium">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse flex-shrink-0" />
-              Available for new roles · Open to full-time &amp; contract
+            <span className="inline-flex items-center gap-2 mb-8 px-3.5 py-1.5 rounded-full text-xs font-semibold"
+              style={{
+                background: 'rgba(37,99,235,0.12)',
+                border: '1px solid rgba(59,130,246,0.3)',
+                color: '#93c5fd',
+              }}
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse flex-shrink-0" />
+              Bay Area AI &amp; Web Agency
             </span>
           </motion.div>
 
-          {/* Name */}
+          {/* Headline */}
           <motion.h1
             variants={stagger.item}
-            className="text-6xl sm:text-7xl md:text-8xl font-bold tracking-tight leading-[0.95] mb-6"
+            className="font-bold tracking-tight leading-[0.93] mb-7"
+            style={{ fontSize: 'clamp(3rem, 8vw, 5.5rem)' }}
           >
-            <span className="text-white">Mirwes</span>
-            <br />
-            <span className="bg-gradient-to-r from-white via-zinc-300 to-zinc-500 bg-clip-text text-transparent">
-              Hakimi
+            {/* Gradient "AI" line */}
+            <span
+              className="block"
+              style={{
+                background: 'linear-gradient(90deg, #60a5fa, #22d3ee, #818cf8)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
+              AI Receptionists
+            </span>
+            <span className="block text-white">&amp; Websites That</span>
+            <span
+              className="block"
+              style={{
+                background: 'linear-gradient(90deg, #ffffff, #cbd5e1)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
+              Grow Your Business.
             </span>
           </motion.h1>
 
-          {/* Role tags */}
-          <motion.div
-            variants={stagger.item}
-            className="flex flex-wrap items-center gap-2 mb-7"
-          >
-            {[
-              { label: 'Frontend Developer', highlight: true },
-              { label: 'React' },
-              { label: 'Next.js' },
-              { label: 'AI Integration' },
-            ].map(({ label, highlight }) => (
-              <span
-                key={label}
-                className={`text-sm px-3 py-1 rounded-full border ${
-                  highlight
-                    ? 'bg-indigo-500/10 border-indigo-500/25 text-indigo-300'
-                    : 'bg-zinc-900/60 border-zinc-800 text-zinc-400'
-                }`}
-              >
-                {label}
-              </span>
-            ))}
-          </motion.div>
-
-          {/* Value proposition */}
+          {/* Subhead */}
           <motion.p
             variants={stagger.item}
-            className="text-lg text-zinc-400 leading-relaxed mb-10 max-w-xl"
+            className="text-lg leading-relaxed mb-10 max-w-xl"
+            style={{ color: '#94a3b8' }}
           >
-            I build fast, accessible, production-ready web apps with React and Next.js.
-            From pixel-perfect UIs to AI-powered features. I care about the experience
-            and the code quality behind it.
+            KBL builds AI voice agents that answer every call and book appointments
+            24/7, plus modern websites that turn visitors into paying customers.
           </motion.p>
 
           {/* CTAs */}
-          <motion.div
-            variants={stagger.item}
-            className="flex flex-col sm:flex-row gap-3 mb-16"
-          >
+          <motion.div variants={stagger.item} className="flex flex-col sm:flex-row gap-3 mb-14">
+
+            {/* Primary — glowing blue phone button */}
+            <div className="relative group">
+              {/* Glow layer behind the button */}
+              <div
+                className="absolute -inset-0.5 rounded-xl opacity-60 group-hover:opacity-90 transition-opacity duration-300"
+                style={{ background: 'linear-gradient(135deg, #2563eb, #06b6d4)', filter: 'blur(8px)' }}
+              />
+              <a
+                href="tel:+19253348542"
+                className="relative inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-semibold text-sm text-white transition-all duration-200"
+                style={{ background: 'linear-gradient(135deg, #2563eb, #0ea5e9)' }}
+              >
+                <FiPhone size={15} />
+                Call Our AI Demo · (925) 334-8542
+              </a>
+            </div>
+
+            {/* Secondary */}
             <Link
-              to="projects"
+              to="contact"
               smooth
               duration={600}
               offset={-80}
-              className="cursor-pointer inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white text-zinc-900 font-semibold text-sm hover:bg-zinc-100 transition-all duration-200 group"
+              className="cursor-pointer inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-medium text-sm transition-all duration-200 group"
+              style={{ border: '1px solid rgba(63,63,70,0.8)', color: '#cbd5e1' }}
             >
-              View My Work
-              <FiArrowRight
-                size={15}
-                className="group-hover:translate-x-0.5 transition-transform duration-200"
-              />
+              Get a Free Consultation
+              <FiArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform duration-200" />
             </Link>
-            <a
-              href="/Resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-zinc-800 text-zinc-300 font-medium text-sm hover:border-zinc-600 hover:text-white transition-all duration-200"
-            >
-              <FiDownload size={15} />
-              Download Resume
-            </a>
           </motion.div>
 
-          {/* Social links */}
+          {/* Stats strip */}
           <motion.div
             variants={stagger.item}
-            className="flex items-center gap-5"
+            className="flex flex-wrap gap-x-10 gap-y-4"
           >
-            {socialLinks.map(({ icon: Icon, href, label }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="text-zinc-600 hover:text-zinc-200 transition-colors duration-200"
-              >
-                <Icon size={19} />
-              </a>
+            {stats.map(({ num, label }, i) => (
+              <div key={label} className="flex flex-col">
+                <span
+                  className="text-2xl font-bold"
+                  style={{
+                    background: i === 0
+                      ? 'linear-gradient(90deg, #60a5fa, #22d3ee)'
+                      : 'white',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
+                >
+                  {num}
+                </span>
+                <span className="text-xs mt-0.5" style={{ color: '#64748b' }}>{label}</span>
+              </div>
             ))}
-            <span className="w-px h-4 bg-zinc-800 mx-1" aria-hidden="true" />
-            <span className="text-xs text-zinc-700 font-mono">mirwes210@gmail.com</span>
           </motion.div>
         </motion.div>
       </div>
@@ -161,15 +215,16 @@ const Hero = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 0.8 }}
+        transition={{ delay: 1.4, duration: 0.8 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         aria-hidden="true"
       >
-        <span className="text-zinc-700 text-xs tracking-widest uppercase">scroll</span>
+        <span className="text-xs tracking-widest uppercase" style={{ color: '#374151' }}>scroll</span>
         <motion.div
-          animate={{ y: [0, 5, 0] }}
+          animate={{ y: [0, 6, 0] }}
           transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
-          className="w-px h-8 bg-gradient-to-b from-zinc-600 to-transparent"
+          className="w-px h-8"
+          style={{ background: 'linear-gradient(to bottom, #4b5563, transparent)' }}
         />
       </motion.div>
     </section>

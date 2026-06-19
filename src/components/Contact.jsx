@@ -1,13 +1,19 @@
 import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import emailjs from 'emailjs-com';
-import { FiGithub, FiLinkedin, FiMail, FiSend, FiCheck } from 'react-icons/fi';
+import { FiLinkedin, FiMail, FiPhone, FiSend, FiCheck } from 'react-icons/fi';
 
 const EMAILJS_SERVICE  = 'service_05tn09g';
 const EMAILJS_TEMPLATE = 'template_k7nr79j';
 const EMAILJS_KEY      = '6LKuop0YHiirMBE0J';
 
 const contactItems = [
+  {
+    icon: FiPhone,
+    label: 'Call or Text',
+    value: '(925) 334-8542',
+    href: 'tel:+19253348542',
+  },
   {
     icon: FiMail,
     label: 'Email',
@@ -17,14 +23,8 @@ const contactItems = [
   {
     icon: FiLinkedin,
     label: 'LinkedIn',
-    value: 'mirwes-hakimi-065b651b7',
+    value: 'KBL Web Solutions',
     href: 'https://www.linkedin.com/in/mirwes-hakimi-065b651b7/',
-  },
-  {
-    icon: FiGithub,
-    label: 'GitHub',
-    value: 'Mirwes-Hakimi',
-    href: 'https://github.com/Mirwes-Hakimi',
   },
 ];
 
@@ -62,14 +62,14 @@ const Contact = () => {
               Contact
             </p>
             <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-6">
-              Let's work
+              Let's grow your
               <br />
-              <span className="text-zinc-500">together.</span>
+              <span className="text-zinc-500">business.</span>
             </h2>
             <p className="text-zinc-400 leading-relaxed mb-10 text-[15px]">
-              I'm actively looking for frontend and React developer roles in 2026. If
-              you're building something interesting or have an open position, I'd love to
-              hear about it.
+              Whether you need a new website, an AI receptionist, or both, we'll scope
+              your project and give you a free quote within 48 hours. No pressure, no
+              obligations.
             </p>
 
             <div className="space-y-3 mb-10">
@@ -77,7 +77,7 @@ const Contact = () => {
                 <a
                   key={label}
                   href={href}
-                  target={href.startsWith('mailto') ? undefined : '_blank'}
+                  target={href.startsWith('mailto') || href.startsWith('tel') ? undefined : '_blank'}
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 text-zinc-400 hover:text-white transition-colors group"
                 >
@@ -96,7 +96,7 @@ const Contact = () => {
 
             <div className="inline-flex items-center gap-2 px-3 py-2 rounded-full border border-emerald-500/20 bg-emerald-500/5 text-emerald-400 text-xs font-medium">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true" />
-              Available for new roles · Ready to start
+              Taking on new clients · Free quotes within 48 hours
             </div>
           </motion.div>
 
@@ -145,14 +145,14 @@ const Contact = () => {
 
               <div>
                 <label htmlFor="message" className="block text-xs font-medium text-zinc-500 mb-2">
-                  Message
+                  Tell us about your business
                 </label>
                 <textarea
                   id="message"
                   name="message"
                   required
                   rows={5}
-                  placeholder="Tell me about the role or project..."
+                  placeholder="What kind of business do you run? What problem are you trying to solve?"
                   className="w-full px-4 py-3 rounded-xl bg-zinc-900 border border-zinc-800 text-white placeholder-zinc-600 text-sm focus:outline-none focus:border-indigo-500/60 focus:bg-zinc-900/80 transition-all resize-none"
                 />
               </div>
@@ -179,7 +179,7 @@ const Contact = () => {
 
               {status === 'error' && (
                 <p className="text-sm text-red-400 text-center pt-1">
-                  Something went wrong. Email me directly at mirwes210@gmail.com.
+                  Something went wrong. Email us directly at mirwes210@gmail.com.
                 </p>
               )}
             </form>
