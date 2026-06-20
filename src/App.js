@@ -1,34 +1,26 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import MarqueeSection from './components/MarqueeSection';
+import About from './components/About';
 import Services from './components/Services';
 import Projects from './components/Projects';
-import About from './components/About';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <div className="bg-zinc-950 text-white min-h-screen">
-              <Navbar />
-              <main>
-                <Hero />
-                <Services />
-                <Projects />
-                <About />
-                <Contact />
-              </main>
-              <Footer />
-            </div>
-          }
-        />
-      </Routes>
-    </Router>
+    <div style={{ backgroundColor: '#07070e', color: '#ffffff', minHeight: '100vh' }}>
+      <Navbar />
+      <main>
+        <Hero />
+        <MarqueeSection />
+        <About />
+        <Services />
+        <Projects />
+        <Contact />
+      </main>
+      <Footer />
+    </div>
   );
 }
 

@@ -1,200 +1,144 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-scroll';
+import ContactButton from './ui/ContactButton';
 
-const navLinks = [
-  { label: 'Services', to: 'services' },
-  { label: 'Work', to: 'projects' },
-  { label: 'About', to: 'about' },
-  { label: 'Contact', to: 'contact' },
+const links = [
+  { label: 'About', id: 'about' },
+  { label: 'Services', id: 'services' },
+  { label: 'Work', id: 'work' },
+  { label: 'Contact', id: 'contact' },
 ];
+
+const scrollTo = (id) =>
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+
+/* ── Logo mark: gradient square + circuit-K SVG ── */
+const LogoMark = () => (
+  <div className="flex items-center gap-2.5 flex-shrink-0">
+    {/* Icon */}
+    <div
+      className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+      style={{ background: 'linear-gradient(135deg, #4338ca 0%, #7c3aed 100%)' }}
+    >
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+        {/* Vertical bar of K */}
+        <line x1="5" y1="2" x2="5" y2="16" stroke="white" strokeWidth="2.4" strokeLinecap="round" />
+        {/* Upper arm */}
+        <line x1="5" y1="9" x2="14" y2="2" stroke="white" strokeWidth="2.4" strokeLinecap="round" />
+        {/* Lower arm */}
+        <line x1="5" y1="9" x2="14" y2="16" stroke="white" strokeWidth="2.4" strokeLinecap="round" />
+        {/* Circuit node at junction */}
+        <circle cx="5" cy="9" r="2.2" fill="white" />
+      </svg>
+    </div>
+    {/* Wordmark */}
+    <div className="leading-none">
+      <span className="font-kanit font-black text-base text-white tracking-wide">KBL</span>
+      <span className="hidden sm:inline font-kanit font-black text-base text-white/30 tracking-wide ml-1">Web Solutions</span>
+    </div>
+  </div>
+);
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [active, setActive] = useState('');
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    // passive: true tells the browser this handler never calls preventDefault(),
-    // so it can run scroll rendering in parallel without waiting for JS to finish
+    const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  useEffect(() => {
-    const sections = document.querySelectorAll('section[id]');
-    // rootMargin shrinks the detection zone to a narrow horizontal band in the
-    // middle of the viewport (ignores top 40% and bottom 55%), so only the section
-    // the user is actually reading triggers the active nav link highlight
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) setActive(e.target.id);
-        });
-      },
-      { rootMargin: '-40% 0px -55% 0px' }
-    );
-    sections.forEach((s) => observer.observe(s));
-    return () => observer.disconnect();
-  }, []);
-
-  const closeMobile = useCallback(() => setMobileOpen(false), []);
-
   return (
-    <motion.header
-      initial={{ y: -64, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-zinc-950/85 backdrop-blur-xl border-b border-zinc-800/60'
-          : 'bg-transparent'
-      }`}
-    >
-      <nav
-        className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between"
-        aria-label="Main navigation"
+    <>
+      <motion.header
+        initial={{ y: -72, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          scrolled ? 'bg-[#0c0c0c]/88 backdrop-blur-md border-b border-white/5' : ''
+        }`}
       >
-        {/* Logo */}
-        <Link
-          to="hero"
-          smooth
-          duration={500}
-          className="cursor-pointer flex items-center gap-2.5 flex-shrink-0"
-          aria-label="Back to top"
-        >
-          {/* Logo mark — gradient square with K letterform */}
-          <div
-            className="w-8 h-8 rounded-lg flex-shrink-0 flex items-center justify-center"
-            style={{ background: 'linear-gradient(135deg, #6366f1 0%, #7c3aed 100%)' }}
+        <nav className="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="cursor-pointer"
+            aria-label="Back to top"
           >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path d="M5 3v10M5 8l6-5M5 8l6 5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <LogoMark />
+          </button>
+
+          {/* Desktop links */}
+          <div className="hidden md:flex items-center gap-10">
+            {links.map(({ label, id }) => (
+              <button
+                key={id}
+                onClick={() => scrollTo(id)}
+                className="text-sm text-white/40 hover:text-white transition-colors duration-200 cursor-pointer"
+              >
+                {label}
+              </button>
+            ))}
           </div>
-          <span className="text-sm font-semibold tracking-wide text-white">
-            KBL <span className="text-indigo-400">Web Solutions</span>
-          </span>
-        </Link>
 
-        {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map(({ label, to }) => (
-            <Link
-              key={to}
-              to={to}
-              smooth
-              duration={600}
-              offset={-80}
-              className={`relative text-sm cursor-pointer transition-colors duration-200 group ${
-                active === to ? 'text-white' : 'text-zinc-500 hover:text-zinc-200'
-              }`}
-            >
-              {label}
-              <span
-                className={`absolute -bottom-1 left-0 h-px bg-indigo-400 transition-all duration-300 ${
-                  active === to ? 'w-full' : 'w-0 group-hover:w-full'
-                }`}
-              />
-            </Link>
-          ))}
-        </div>
+          <div className="hidden md:block">
+            <ContactButton label="Get in touch" />
+          </div>
 
-        {/* Desktop CTAs */}
-        <div className="hidden md:flex items-center gap-3">
-          <a
-            href="tel:+19253348542"
-            className="inline-flex items-center gap-1.5 text-sm px-4 py-2 rounded-lg border border-zinc-800 text-zinc-400 hover:border-zinc-600 hover:text-white transition-all duration-200"
+          {/* Mobile hamburger */}
+          <button
+            onClick={() => setOpen((v) => !v)}
+            aria-label="Toggle menu"
+            className="md:hidden flex flex-col gap-[5px] p-1 cursor-pointer"
           >
-            Call AI Demo
-          </a>
-          <Link
-            to="contact"
-            smooth
-            duration={600}
-            offset={-80}
-            className="cursor-pointer text-sm px-4 py-2 rounded-lg bg-white text-zinc-900 font-semibold hover:bg-zinc-100 transition-all duration-200"
-          >
-            Get a Quote
-          </Link>
-        </div>
-
-        {/* Mobile toggle */}
-        <button
-          onClick={() => setMobileOpen((v) => !v)}
-          aria-label="Toggle menu"
-          aria-expanded={mobileOpen}
-          className="md:hidden relative w-8 h-8 flex flex-col justify-center items-center gap-[5px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded"
-        >
-          {/* Top and bottom lines move toward center (y: ±7px) then rotate to form an X */}
-          <motion.span
-            animate={mobileOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
-            transition={{ duration: 0.2 }}
-            className="w-5 h-px bg-white block"
-          />
-          {/* Middle line fades out so only the X shape remains */}
-          <motion.span
-            animate={mobileOpen ? { opacity: 0, x: -4 } : { opacity: 1, x: 0 }}
-            transition={{ duration: 0.2 }}
-            className="w-5 h-px bg-white block"
-          />
-          <motion.span
-            animate={mobileOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
-            transition={{ duration: 0.2 }}
-            className="w-5 h-px bg-white block"
-          />
-        </button>
-      </nav>
+            <motion.span
+              animate={open ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
+              transition={{ duration: 0.2 }}
+              className="block w-5 h-px bg-white"
+            />
+            <motion.span
+              animate={open ? { opacity: 0 } : { opacity: 1 }}
+              transition={{ duration: 0.15 }}
+              className="block w-5 h-px bg-white"
+            />
+            <motion.span
+              animate={open ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
+              transition={{ duration: 0.2 }}
+              className="block w-5 h-px bg-white"
+            />
+          </button>
+        </nav>
+      </motion.header>
 
       {/* Mobile menu */}
       <AnimatePresence>
-        {mobileOpen && (
+        {open && (
           <motion.div
             key="mobile-menu"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: 'easeInOut' }}
-            className="md:hidden overflow-hidden bg-zinc-950/95 backdrop-blur-xl border-b border-zinc-800"
+            initial={{ opacity: 0, y: -16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.22, ease: 'easeInOut' }}
+            className="fixed inset-x-0 top-16 z-40 bg-[#0c0c0c]/96 backdrop-blur-xl border-b border-white/8 md:hidden"
           >
-            <div className="max-w-6xl mx-auto px-6 py-6 flex flex-col gap-1">
-              {navLinks.map(({ label, to }) => (
-                <Link
-                  key={to}
-                  to={to}
-                  smooth
-                  duration={600}
-                  offset={-80}
-                  onClick={closeMobile}
-                  className="text-zinc-300 hover:text-white py-3 cursor-pointer text-base border-b border-zinc-900 last:border-0 transition-colors"
+            <div className="px-6 py-8 flex flex-col gap-6">
+              {links.map(({ label, id }) => (
+                <button
+                  key={id}
+                  onClick={() => { scrollTo(id); setOpen(false); }}
+                  className="text-2xl font-kanit font-black text-left text-white/50 hover:text-white transition-colors cursor-pointer"
                 >
                   {label}
-                </Link>
+                </button>
               ))}
-              <div className="flex gap-3 pt-5">
-                <a
-                  href="tel:+19253348542"
-                  className="flex-1 text-center py-3 rounded-xl border border-zinc-800 text-zinc-400 text-sm hover:border-zinc-600 transition-colors"
-                >
-                  Call AI Demo
-                </a>
-                <Link
-                  to="contact"
-                  smooth
-                  duration={600}
-                  offset={-80}
-                  onClick={closeMobile}
-                  className="flex-1 text-center py-3 rounded-xl bg-white text-zinc-900 text-sm font-semibold cursor-pointer hover:bg-zinc-100 transition-colors"
-                >
-                  Get a Quote
-                </Link>
+              <div className="pt-4">
+                <ContactButton label="Get in touch" onClick={() => setOpen(false)} />
               </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </>
   );
 };
 

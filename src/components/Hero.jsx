@@ -1,234 +1,150 @@
-import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-scroll';
-import { FiArrowRight, FiPhone } from 'react-icons/fi';
+import ContactButton from './ui/ContactButton';
 
 const stagger = {
-  container: {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
-  },
+  container: { hidden: {}, show: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } } },
   item: {
-    hidden: { opacity: 0, y: 28 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] } },
+    hidden: { opacity: 0, y: 40 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] } },
   },
 };
 
 const stats = [
-  { num: '24/7', label: 'AI Availability' },
-  { num: '3', label: 'Languages' },
-  { num: '5+', label: 'Live Client Sites' },
-  { num: 'Free', label: 'Initial Quote' },
+  { value: '20+', label: 'Client projects' },
+  { value: '24/7', label: 'AI uptime' },
+  { value: '3', label: 'Languages' },
+  { value: 'Free', label: 'Initial quote' },
 ];
 
-const Hero = () => {
-  return (
-    <section
-      id="hero"
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden"
-      style={{ background: '#020817' }}
-    >
-      {/* ── Animated gradient mesh background ── */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+const Hero = () => (
+  <section
+    id="hero"
+    className="relative min-h-screen flex flex-col justify-between px-6 md:px-10 pt-28 pb-14 overflow-hidden dot-grid"
+  >
+    {/* ── Strong ambient glow layer ── */}
+    <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
 
-        {/* Subtle grid lines */}
-        <div
-          className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(99,102,241,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(99,102,241,0.6) 1px, transparent 1px)',
-            backgroundSize: '44px 44px',
-          }}
-        />
-
-        {/* Blue blob — main glow, top-left */}
-        <motion.div
-          animate={{ x: [0, 40, 0], y: [0, -30, 0] }}
-          transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute rounded-full"
-          style={{
-            top: '15%', left: '5%',
-            width: '700px', height: '700px',
-            background: 'radial-gradient(circle, rgba(37,99,235,0.22) 0%, rgba(59,130,246,0.1) 45%, transparent 70%)',
-            filter: 'blur(80px)',
-          }}
-        />
-
-        {/* Violet blob — bottom-right */}
-        <motion.div
-          animate={{ x: [0, -30, 0], y: [0, 40, 0] }}
-          transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut', delay: 3 }}
-          className="absolute rounded-full"
-          style={{
-            bottom: '10%', right: '5%',
-            width: '600px', height: '600px',
-            background: 'radial-gradient(circle, rgba(124,58,237,0.18) 0%, rgba(139,92,246,0.08) 45%, transparent 70%)',
-            filter: 'blur(70px)',
-          }}
-        />
-
-        {/* Cyan accent — center-right */}
-        <motion.div
-          animate={{ x: [0, 20, 0], y: [0, -20, 0] }}
-          transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut', delay: 6 }}
-          className="absolute rounded-full"
-          style={{
-            top: '50%', right: '25%',
-            width: '400px', height: '400px',
-            background: 'radial-gradient(circle, rgba(6,182,212,0.1) 0%, transparent 70%)',
-            filter: 'blur(60px)',
-          }}
-        />
-
-        {/* Top edge glow line */}
-        <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-px"
-          style={{ background: 'linear-gradient(90deg, transparent, rgba(99,102,241,0.4), rgba(6,182,212,0.3), transparent)' }}
-        />
-      </div>
-
-      <div className="relative max-w-6xl mx-auto px-6 pt-28 pb-20 w-full">
-        <motion.div
-          variants={stagger.container}
-          initial="hidden"
-          animate="show"
-          className="max-w-3xl"
-        >
-          {/* Badge */}
-          <motion.div variants={stagger.item}>
-            <span className="inline-flex items-center gap-2 mb-8 px-3.5 py-1.5 rounded-full text-xs font-semibold"
-              style={{
-                background: 'rgba(37,99,235,0.12)',
-                border: '1px solid rgba(59,130,246,0.3)',
-                color: '#93c5fd',
-              }}
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse flex-shrink-0" />
-              Bay Area AI &amp; Web Agency
-            </span>
-          </motion.div>
-
-          {/* Headline */}
-          <motion.h1
-            variants={stagger.item}
-            className="font-bold tracking-tight leading-[0.93] mb-7"
-            style={{ fontSize: 'clamp(3rem, 8vw, 5.5rem)' }}
-          >
-            {/* Gradient "AI" line */}
-            <span
-              className="block"
-              style={{
-                background: 'linear-gradient(90deg, #60a5fa, #22d3ee, #818cf8)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
-            >
-              AI Receptionists
-            </span>
-            <span className="block text-white">&amp; Websites That</span>
-            <span
-              className="block"
-              style={{
-                background: 'linear-gradient(90deg, #ffffff, #cbd5e1)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
-            >
-              Grow Your Business.
-            </span>
-          </motion.h1>
-
-          {/* Subhead */}
-          <motion.p
-            variants={stagger.item}
-            className="text-lg leading-relaxed mb-10 max-w-xl"
-            style={{ color: '#94a3b8' }}
-          >
-            KBL builds AI voice agents that answer every call and book appointments
-            24/7, plus modern websites that turn visitors into paying customers.
-          </motion.p>
-
-          {/* CTAs */}
-          <motion.div variants={stagger.item} className="flex flex-col sm:flex-row gap-3 mb-14">
-
-            {/* Primary — glowing blue phone button */}
-            <div className="relative group">
-              {/* Glow layer behind the button */}
-              <div
-                className="absolute -inset-0.5 rounded-xl opacity-60 group-hover:opacity-90 transition-opacity duration-300"
-                style={{ background: 'linear-gradient(135deg, #2563eb, #06b6d4)', filter: 'blur(8px)' }}
-              />
-              <a
-                href="tel:+19253348542"
-                className="relative inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-semibold text-sm text-white transition-all duration-200"
-                style={{ background: 'linear-gradient(135deg, #2563eb, #0ea5e9)' }}
-              >
-                <FiPhone size={15} />
-                Call Our AI Demo · (925) 334-8542
-              </a>
-            </div>
-
-            {/* Secondary */}
-            <Link
-              to="contact"
-              smooth
-              duration={600}
-              offset={-80}
-              className="cursor-pointer inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-medium text-sm transition-all duration-200 group"
-              style={{ border: '1px solid rgba(63,63,70,0.8)', color: '#cbd5e1' }}
-            >
-              Get a Free Consultation
-              <FiArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform duration-200" />
-            </Link>
-          </motion.div>
-
-          {/* Stats strip */}
-          <motion.div
-            variants={stagger.item}
-            className="flex flex-wrap gap-x-10 gap-y-4"
-          >
-            {stats.map(({ num, label }, i) => (
-              <div key={label} className="flex flex-col">
-                <span
-                  className="text-2xl font-bold"
-                  style={{
-                    background: i === 0
-                      ? 'linear-gradient(90deg, #60a5fa, #22d3ee)'
-                      : 'white',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                  }}
-                >
-                  {num}
-                </span>
-                <span className="text-xs mt-0.5" style={{ color: '#64748b' }}>{label}</span>
-              </div>
-            ))}
-          </motion.div>
-        </motion.div>
-      </div>
-
-      {/* Scroll hint */}
+      {/* Large indigo cloud — top-right, very visible */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.4, duration: 0.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        aria-hidden="true"
-      >
-        <span className="text-xs tracking-widest uppercase" style={{ color: '#374151' }}>scroll</span>
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
-          className="w-px h-8"
-          style={{ background: 'linear-gradient(to bottom, #4b5563, transparent)' }}
-        />
+        animate={{ x: [0, 35, 0], y: [0, -25, 0] }}
+        transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute"
+        style={{
+          top: '-20%', right: '-15%',
+          width: '1000px', height: '1000px',
+          background: 'radial-gradient(circle, rgba(99,102,241,0.30) 0%, rgba(139,92,246,0.14) 38%, transparent 65%)',
+          filter: 'blur(80px)',
+        }}
+      />
+
+      {/* Blue cloud — bottom-left */}
+      <motion.div
+        animate={{ x: [0, -25, 0], y: [0, 35, 0] }}
+        transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut', delay: 5 }}
+        className="absolute"
+        style={{
+          bottom: '-20%', left: '-12%',
+          width: '850px', height: '850px',
+          background: 'radial-gradient(circle, rgba(59,130,246,0.25) 0%, rgba(99,102,241,0.1) 42%, transparent 68%)',
+          filter: 'blur(90px)',
+        }}
+      />
+
+      {/* Violet accent — center-right */}
+      <motion.div
+        animate={{ scale: [1, 1.12, 1], opacity: [0.5, 1, 0.5] }}
+        transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut', delay: 3 }}
+        className="absolute"
+        style={{
+          top: '30%', right: '10%',
+          width: '550px', height: '550px',
+          background: 'radial-gradient(circle, rgba(168,85,247,0.18) 0%, transparent 65%)',
+          filter: 'blur(70px)',
+        }}
+      />
+
+      {/* Subtle top edge beam */}
+      <div
+        className="absolute top-0 left-1/2 -translate-x-1/2 h-px"
+        style={{
+          width: '900px',
+          background: 'linear-gradient(90deg, transparent, rgba(139,92,246,0.5), rgba(99,102,241,0.4), transparent)',
+        }}
+      />
+    </div>
+
+    {/* ── Heading ── */}
+    <motion.div
+      variants={stagger.container}
+      initial="hidden"
+      animate="show"
+      className="relative z-10"
+    >
+      <motion.div variants={stagger.item}>
+        <div className="inline-flex items-center gap-2 mb-8 px-3 py-1.5 rounded-full border border-violet-500/25 text-violet-300/60 text-xs"
+          style={{ background: 'rgba(139,92,246,0.08)' }}>
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          Bay Area · Web & AI Studio · Taking on new clients
+        </div>
       </motion.div>
-    </section>
-  );
-};
+
+      <motion.h1
+        variants={stagger.item}
+        className="hero-heading font-kanit font-black leading-[0.88] tracking-tight"
+        style={{ fontSize: 'clamp(4.5rem, 13.5vw, 13rem)' }}
+      >
+        We build<br />AI agents
+      </motion.h1>
+    </motion.div>
+
+    {/* ── Stats strip ── */}
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
+      className="relative z-10 grid grid-cols-2 md:grid-cols-4 my-12 md:my-16 rounded-2xl overflow-hidden"
+      style={{
+        border: '1px solid rgba(139,92,246,0.2)',
+        background: 'rgba(139,92,246,0.06)',
+        backdropFilter: 'blur(12px)',
+      }}
+    >
+      {stats.map(({ value, label }, i) => (
+        <div
+          key={label}
+          className={`py-6 px-5 md:px-7 ${i < stats.length - 1 ? 'border-r border-violet-500/15' : ''} ${i >= 2 ? 'border-t border-violet-500/15 md:border-t-0' : ''}`}
+        >
+          <div
+            className="font-kanit font-black leading-none"
+            style={{
+              fontSize: 'clamp(1.8rem, 3.5vw, 3rem)',
+              background: 'linear-gradient(135deg, #ffffff 40%, #c4b5fd 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
+          >
+            {value}
+          </div>
+          <div className="text-white/30 text-xs mt-2">{label}</div>
+        </div>
+      ))}
+    </motion.div>
+
+    {/* ── Description + CTA ── */}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.75, ease: [0.22, 1, 0.36, 1] }}
+      className="relative z-10 flex flex-col md:flex-row md:items-end md:justify-between gap-8"
+    >
+      <p className="text-white/45 text-base md:text-lg leading-relaxed max-w-sm">
+        A web and AI development studio crafting custom agents, voice assistants,
+        and modern web apps that actually ship.
+      </p>
+      <ContactButton label="Let's talk" />
+    </motion.div>
+  </section>
+);
 
 export default Hero;
