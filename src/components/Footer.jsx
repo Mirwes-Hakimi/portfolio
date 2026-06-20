@@ -1,5 +1,3 @@
-import { motion } from 'framer-motion';
-
 const scrollTo = (id) =>
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 

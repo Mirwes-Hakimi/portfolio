@@ -21,13 +21,8 @@ const Contact = () => {
     setStatus('sending');
 
     try {
-      // Wire up EmailJS when ready:
-      // const emailjs = (await import('emailjs-com')).default;
-      // await emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, form, EMAILJS_KEY);
-      // setStatus('sent');
-
-      // Placeholder until email service is wired:
-      await new Promise((r) => setTimeout(r, 900));
+      const emailjs = (await import('emailjs-com')).default;
+      await emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, form, EMAILJS_KEY);
       setStatus('sent');
     } catch {
       setStatus('error');
