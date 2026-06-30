@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 
-/* All 9 available screenshots */
 const tiles = [
   '/DMVpracticeTest.png',
   '/ss-1.png',
@@ -16,17 +15,28 @@ const tiles = [
 const doubled = [...tiles, ...tiles];
 
 const MarqueeSection = () => (
-  <div className="py-10 overflow-hidden" style={{ borderTop: '1px solid rgba(139,92,246,0.12)', borderBottom: '1px solid rgba(139,92,246,0.12)' }}>
+  <div
+    className="py-12 overflow-hidden marquee-mask"
+    style={{
+      borderTop: '1px solid rgba(139,92,246,0.1)',
+      borderBottom: '1px solid rgba(139,92,246,0.1)',
+      background: 'linear-gradient(180deg, rgba(99,102,241,0.03) 0%, transparent 100%)',
+    }}
+  >
     <motion.div
       animate={{ x: ['0%', '-50%'] }}
-      transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
-      style={{ display: 'flex', gap: '14px', width: 'max-content' }}
+      transition={{ duration: 34, repeat: Infinity, ease: 'linear' }}
+      style={{ display: 'flex', gap: '16px', width: 'max-content' }}
     >
       {doubled.map((src, i) => (
         <div
           key={i}
-          className="w-[280px] h-[170px] flex-shrink-0 rounded-xl overflow-hidden"
-          style={{ border: '1px solid rgba(139,92,246,0.15)', background: '#0f0f1a' }}
+          className="w-[280px] h-[172px] flex-shrink-0 rounded-2xl overflow-hidden transition-all duration-300"
+          style={{
+            border: '1px solid rgba(139,92,246,0.12)',
+            background: '#0d0d18',
+            boxShadow: '0 4px 24px rgba(0,0,0,0.35)',
+          }}
         >
           <img
             src={src}

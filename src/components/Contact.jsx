@@ -7,17 +7,17 @@ const EMAILJS_TEMPLATE = 'template_k7nr79j';
 const EMAILJS_KEY      = '6LKuop0YHiirMBE0J';
 
 const inputClass =
-  'w-full bg-white/4 border border-white/10 rounded-xl px-5 py-3.5 text-white text-sm placeholder-white/25 focus:outline-none focus:border-white/30 focus:bg-white/6 transition-all duration-200';
+  'w-full bg-white/5 border border-white/10 rounded-xl px-5 py-3.5 text-white text-sm placeholder-white/25 focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all duration-200';
 
 const Contact = () => {
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [form, setForm] = useState({ user_name: '', user_email: '', message: '' });
   const [status, setStatus] = useState('idle'); // idle | sending | sent | error
 
   const onChange = (e) =>
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
   const onSubmit = async () => {
-    if (!form.name || !form.email || !form.message) return;
+    if (!form.user_name || !form.user_email || !form.message) return;
     setStatus('sending');
 
     try {
@@ -64,8 +64,8 @@ const Contact = () => {
           </div>
         </FadeIn>
 
-        {/* Right: form */}
-        <FadeIn delay={0.15}>
+        {/* Right: form — no whileInView so the form is always interactive */}
+        <div>
           {status === 'sent' ? (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -76,7 +76,7 @@ const Contact = () => {
               <p className="font-kanit font-black text-white text-2xl">Message sent.</p>
               <p className="text-white/40 text-sm">We'll be in touch within 24 hours.</p>
               <button
-                onClick={() => { setForm({ name: '', email: '', message: '' }); setStatus('idle'); }}
+                onClick={() => { setForm({ user_name: '', user_email: '', message: '' }); setStatus('idle'); }}
                 className="text-xs text-white/30 hover:text-white transition-colors mt-2 cursor-pointer"
               >
                 Send another
@@ -89,9 +89,9 @@ const Contact = () => {
                   Name
                 </label>
                 <input
-                  name="name"
+                  name="user_name"
                   type="text"
-                  value={form.name}
+                  value={form.user_name}
                   onChange={onChange}
                   placeholder="Your name"
                   autoComplete="name"
@@ -104,9 +104,9 @@ const Contact = () => {
                   Email
                 </label>
                 <input
-                  name="email"
+                  name="user_email"
                   type="email"
-                  value={form.email}
+                  value={form.user_email}
                   onChange={onChange}
                   placeholder="your@email.com"
                   autoComplete="email"
@@ -145,7 +145,7 @@ const Contact = () => {
               )}
             </div>
           )}
-        </FadeIn>
+        </div>
 
       </div>
     </section>

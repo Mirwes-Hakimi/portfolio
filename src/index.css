@@ -17,7 +17,6 @@
   }
 
   body {
-    /* Dark navy-black — makes colored glows pop much better than pure black */
     background-color: #07070e;
     color: #ffffff;
     font-family: 'Kanit', system-ui, -apple-system, sans-serif;
@@ -32,12 +31,26 @@
 
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: #07070e; }
-  ::-webkit-scrollbar-thumb { background: #2a2040; border-radius: 4px; }
-  ::-webkit-scrollbar-thumb:hover { background: #3a2f58; }
+  ::-webkit-scrollbar-thumb { background: rgba(139, 92, 246, 0.3); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(139, 92, 246, 0.55); }
 }
 
 @layer utilities {
-  /* Hero heading: white → indigo → violet gradient for max visual impact */
+  /* Subtle line grid for hero depth */
+  .hero-grid {
+    background-image:
+      linear-gradient(rgba(139, 92, 246, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(139, 92, 246, 0.045) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+
+  /* Dot grid (other sections) */
+  .dot-grid {
+    background-image: radial-gradient(rgba(139, 92, 246, 0.12) 1px, transparent 1px);
+    background-size: 36px 36px;
+  }
+
+  /* Hero heading white→indigo */
   .hero-heading {
     background: linear-gradient(165deg, #ffffff 30%, #c7d2fe 62%, rgba(139, 92, 246, 0.65) 100%);
     -webkit-background-clip: text;
@@ -45,9 +58,34 @@
     background-clip: text;
   }
 
-  /* Subtle dot grid pattern for section backgrounds */
-  .dot-grid {
-    background-image: radial-gradient(rgba(139, 92, 246, 0.12) 1px, transparent 1px);
-    background-size: 36px 36px;
+  /* "AI agents" dramatic violet→blue */
+  .gradient-ai {
+    background: linear-gradient(135deg, #a78bfa 0%, #818cf8 38%, #60a5fa 72%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Side-fade masks for marquee */
+  .marquee-mask {
+    mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      black 12%,
+      black 88%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      black 12%,
+      black 88%,
+      transparent 100%
+    );
+  }
+
+  /* Gradient border glow utility */
+  .glow-border {
+    box-shadow: 0 0 0 1px rgba(139, 92, 246, 0.3), 0 0 24px rgba(139, 92, 246, 0.15);
   }
 }
